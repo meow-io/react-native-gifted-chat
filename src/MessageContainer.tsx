@@ -151,8 +151,15 @@ export default class MessageContainer<
     hasScrolled: false,
   }
 
-  componentDidUpdate = (_: MessageContainerProps<TMessage>, prevState: State) => {
-    if (this.props.onScrolledToBottom && (prevState.showScrollBottom === true && !this.state.showScrollBottom)) {
+  componentDidUpdate = (
+    _: MessageContainerProps<TMessage>,
+    prevState: State,
+  ) => {
+    if (
+      this.props.onScrolledToBottom &&
+      prevState.showScrollBottom === true &&
+      !this.state.showScrollBottom
+    ) {
       if (this.props.onScrolledToBottom) this.props.onScrolledToBottom()
     }
   }

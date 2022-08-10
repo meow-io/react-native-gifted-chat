@@ -159,7 +159,8 @@ export default class MessageContainer<
       this.props.onScrolledToBottom &&
       prevState.showScrollBottom !== this.state.showScrollBottom
     ) {
-      if (this.props.onScrolledToBottom) this.props.onScrolledToBottom(!this.state.showScrollBottom)
+      if (this.props.onScrolledToBottom)
+        this.props.onScrolledToBottom(!this.state.showScrollBottom)
     }
   }
 

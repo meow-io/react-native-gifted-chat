@@ -159,7 +159,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /*Callback when loading earlier messages*/
   onLoadEarlier?(): void
   /*Callback when scroll to bottom*/
-  onScrolledToBottom?(): void
+  onScrolledToBottom?(atBottom: boolean): void
   /*  Render a loading view when initializing */
   renderLoading?(): React.ReactNode
   /* Custom "Load earlier messages" button */

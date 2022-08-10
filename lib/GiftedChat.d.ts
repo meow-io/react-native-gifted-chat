@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { RefObject } from 'react';
 import { Animated, StyleProp, ViewStyle, FlatList, TextStyle, LayoutChangeEvent } from 'react-native';
-import { ActionSheetProvider, ActionSheetOptions } from '@expo/react-native-action-sheet';
+import { ActionSheetOptions } from '@expo/react-native-action-sheet';
 import * as utils from './utils';
 import { Actions, ActionsProps } from './Actions';
 import { Avatar, AvatarProps } from './Avatar';
@@ -21,6 +21,7 @@ import { QuickRepliesProps } from './QuickReplies';
 import GiftedAvatar from './GiftedAvatar';
 import { IMessage, User, Reply, LeftRightStyle, MessageVideoProps, MessageAudioProps } from './Models';
 import { LightboxProps } from 'react-native-lightbox-v2';
+import { ActionSheetProviderRef } from '@expo/react-native-action-sheet';
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     messages?: TMessage[];
     isTyping?: boolean;
@@ -75,7 +76,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     messageIdGenerator?(message?: TMessage): string;
     onSend?(messages: TMessage[]): void;
     onLoadEarlier?(): void;
-    onScrolledToBottom?(): void;
+    onScrolledToBottom?(atBottom: boolean): void;
     renderLoading?(): React.ReactNode;
     renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode;
     renderAvatar?(props: AvatarProps<TMessage>): React.ReactNode | null;
@@ -83,6 +84,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
     renderSystemMessage?(props: SystemMessageProps<TMessage>): React.ReactNode;
     onPress?(context: any, message: TMessage): void;
     onLongPress?(context: any, message: TMessage): void;
+    renderUsername?(user: User): React.ReactNode;
     renderMessage?(message: Message<TMessage>['props']): React.ReactNode;
     renderMessageText?(messageText: MessageTextProps<TMessage>): React.ReactNode;
     renderMessageImage?(props: MessageImageProps<TMessage>): React.ReactNode;
@@ -145,6 +147,7 @@ declare class GiftedChat<TMessage extends IMessage = IMessage> extends React.Com
         renderBubble: null;
         renderSystemMessage: null;
         onLongPress: null;
+        renderUserName: null;
         renderMessage: null;
         renderMessageText: null;
         renderMessageImage: null;
@@ -256,7 +259,7 @@ declare class GiftedChat<TMessage extends IMessage = IMessage> extends React.Com
     _isFirstLayout: boolean;
     _locale: string;
     invertibleScrollViewProps: any;
-    _actionSheetRef: RefObject<ActionSheetProvider>;
+    _actionSheetRef: RefObject<ActionSheetProviderRef>;
     _messageContainerRef?: RefObject<FlatList<IMessage>>;
     _isTextInputWasFocused: boolean;
     textInput?: any;

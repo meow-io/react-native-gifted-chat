@@ -41,7 +41,7 @@ export interface BubbleProps<TMessage extends IMessage> {
     renderCustomView?(bubbleProps: BubbleProps<TMessage>): React.ReactNode;
     renderTime?(timeProps: TimeProps<TMessage>): React.ReactNode;
     renderTicks?(currentMessage: TMessage): React.ReactNode;
-    renderUsername?(): React.ReactNode;
+    renderUsername?(user?: TMessage['user']): React.ReactNode;
     renderQuickReplySend?(): React.ReactNode;
     renderQuickReplies?(quickReplies: QuickRepliesProps<TMessage>): React.ReactNode;
 }
@@ -141,7 +141,7 @@ export default class Bubble<TMessage extends IMessage = IMessage> extends React.
     renderMessageAudio(): React.ReactNode;
     renderTicks(): React.ReactNode;
     renderTime(): React.ReactNode;
-    renderUsername(): JSX.Element | null;
+    renderUsername(): React.ReactNode;
     renderCustomView(): React.ReactNode;
     renderBubbleContent(): JSX.Element;
     render(): JSX.Element;

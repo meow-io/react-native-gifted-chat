@@ -24,7 +24,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
     renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode;
     scrollToBottomComponent?(): React.ReactNode;
     onLoadEarlier?(): void;
-    onScrolledToBottom?(): void;
+    onScrolledToBottom?(atBottom: boolean): void;
     onQuickReply?(replies: Reply[]): void;
     infiniteScroll?: boolean;
     isLoadingEarlier?: boolean;

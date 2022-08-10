@@ -86,7 +86,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   renderLoadEarlier?(props: LoadEarlierProps): React.ReactNode
   scrollToBottomComponent?(): React.ReactNode
   onLoadEarlier?(): void
-  onScrolledToBottom?(): void
+  onScrolledToBottom?(atBottom: boolean): void
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
@@ -157,10 +157,9 @@ export default class MessageContainer<
   ) => {
     if (
       this.props.onScrolledToBottom &&
-      prevState.showScrollBottom === true &&
-      !this.state.showScrollBottom
+      prevState.showScrollBottom !== this.state.showScrollBottom
     ) {
-      if (this.props.onScrolledToBottom) this.props.onScrolledToBottom()
+      if (this.props.onScrolledToBottom) this.props.onScrolledToBottom(!this.state.showScrollBottom)
     }
   }
 
